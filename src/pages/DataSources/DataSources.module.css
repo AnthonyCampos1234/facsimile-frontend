@@ -1,0 +1,69 @@
+.container {
+  height: calc(100vh - 64px); /* Adjust based on navbar height */
+  padding: 2rem;
+  background-color: #1a1a1a;
+  overflow: hidden;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+}
+
+.header h1 {
+  color: white;
+  margin: 0;
+}
+
+.addButton {
+  padding: 0.75rem 1.5rem;
+  background: var(--blue-gradient);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: opacity 0.3s ease;
+}
+
+.addButton:hover {
+  opacity: 0.9;
+}
+
+.sourcesList {
+  height: calc(100vh - 180px); /* Adjust for navbar + header + padding */
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  padding-right: 1rem; /* Space for scrollbar */
+}
+
+.sourcesList::-webkit-scrollbar {
+  width: 8px;
+}
+
+.sourcesList::-webkit-scrollbar-track {
+  background: #1a1a1a;
+  border-radius: 4px;
+}
+
+.sourcesList::-webkit-scrollbar-thumb {
+  background: #3f3f3f;
+  border-radius: 4px;
+}
+
+.sourcesList::-webkit-scrollbar-thumb:hover {
+  background: #4f4f4f;
+}
+
+.emptyState {
+  text-align: center;
+  padding: 3rem;
+  color: #888;
+  background: #242424;
+  border-radius: 12px;
+  border: 1px solid #3f3f3f;
+}
