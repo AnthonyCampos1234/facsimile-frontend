@@ -20,6 +20,36 @@
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
+.chatHeader {
+  padding: 1.25rem;
+  border-bottom: 1px solid #3f3f3f;
+  display: flex;
+  justify-content: flex-end; /* Changed from space-between to flex-end */
+  align-items: center;
+}
+
+.chatHeader h2 {
+  margin: 0;
+  color: white;
+  font-size: 1rem;
+  font-weight: 500;
+}
+
+.clearButton {
+  padding: 0.5rem 1rem;
+  background: transparent;
+  color: #888;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 0.875rem;
+  transition: color 0.2s ease;
+}
+
+.clearButton:hover {
+  color: white;
+}
+
 .messagesArea {
   flex-grow: 1;
   overflow-y: auto;

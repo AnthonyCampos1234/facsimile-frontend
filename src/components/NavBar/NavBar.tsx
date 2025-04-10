@@ -8,6 +8,9 @@ function NavBar() {
       </div>
       <ul className={styles.navLinks}>
         <li>
+          <a href="/">Chat</a>
+        </li>
+        <li>
           <a href="/sources">Data Sources</a>
         </li>
         <li>

@@ -36,9 +36,18 @@ function Home() {
     }
   };
 
+  const handleClearChat = () => {
+    setMessages([]);
+  };
+
   return (
     <div className={styles.container}>
       <div className={styles.chatContainer}>
+        <div className={styles.chatHeader}>
+          <button onClick={handleClearChat} className={styles.clearButton}>
+            Clear Chat
+          </button>
+        </div>
         <div className={styles.messagesArea}>
           <div className={styles.messageWrapper}>
             {messages.map((message, index) => (
