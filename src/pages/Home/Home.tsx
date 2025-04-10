@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import styles from './Home.module.css';
+import { getActiveDataSources } from '../DataSources/DataSources';
 
 function Home() {
   const [messages, setMessages] = useState<
@@ -27,6 +28,9 @@ function Home() {
       ]);
       setInput('');
     }
+
+    const activeDataSources = getActiveDataSources();
+    console.log('Active sources for context:', activeDataSources);
   };
 
   const handleKeyDown = (e: React.KeyboardEvent) => {

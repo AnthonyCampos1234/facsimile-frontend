@@ -11,37 +11,57 @@ interface DataSource {
   status: 'active' | 'inactive';
 }
 
+// Create a context store for active data sources
+export const getActiveDataSources = () => {
+  const storedSources = localStorage.getItem('dataSources');
+  if (storedSources) {
+    const sources: DataSource[] = JSON.parse(storedSources);
+    return sources.filter((source) => source.status === 'active');
+  }
+  return [];
+};
+
 function DataSources() {
   const [dataSources, setDataSources] = useState<DataSource[]>([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
   const [connectionError, setConnectionError] = useState('');
-  
+
   const location = useLocation();
-  
+
+  // Update localStorage whenever dataSources changes
+  useEffect(() => {
+    localStorage.setItem('dataSources', JSON.stringify(dataSources));
+  }, [dataSources]);
+
   // Check connection status when component mounts or after redirect
   useEffect(() => {
     const checkConnectionStatus = async () => {
       try {
         setIsLoading(true);
-        const response = await fetch('http://localhost:3001/api/v1/auth/connection/status', {
-          credentials: 'include' // Send cookies with the request
-        });
-        
+        const response = await fetch(
+          'http://localhost:3001/api/v1/auth/connection/status',
+          {
+            credentials: 'include' // Send cookies with the request
+          }
+        );
+
         if (!response.ok) {
           throw new Error('Failed to check connection status');
         }
-        
+
         const data = await response.json();
-        
+
         if (data.isConnected) {
           // If Google services are connected, add them to data sources
           const connectedSources: DataSource[] = [];
-          
+
           // Check which scopes are available
           const scopes = data.scopes || [];
-          
-          if (scopes.includes('https://www.googleapis.com/auth/gmail.readonly')) {
+
+          if (
+            scopes.includes('https://www.googleapis.com/auth/gmail.readonly')
+          ) {
             connectedSources.push({
               id: 'gmail-' + Date.now(),
               name: 'Gmail',
@@ -49,8 +69,10 @@ function DataSources() {
               status: 'active'
             });
           }
-          
-          if (scopes.includes('https://www.googleapis.com/auth/calendar.readonly')) {
+
+          if (
+            scopes.includes('https://www.googleapis.com/auth/calendar.readonly')
+          ) {
             connectedSources.push({
               id: 'calendar-' + Date.now(),
               name: 'Google Calendar',
@@ -58,17 +80,19 @@ function DataSources() {
               status: 'active'
             });
           }
-          
+
           setDataSources(connectedSources);
         }
       } catch (error) {
         console.error('Error checking connection status:', error);
-        setConnectionError('Failed to check connection status. Please try again.');
+        setConnectionError(
+          'Failed to check connection status. Please try again.'
+        );
       } finally {
         setIsLoading(false);
       }
     };
-    
+
     // Check if we're returning from a successful connection
     if (location.pathname === '/connect/success') {
       checkConnectionStatus();
@@ -86,6 +110,22 @@ function DataSources() {
     };
 
     setDataSources([...dataSources, newSource]);
+  };
+
+  const handleDisconnect = (id: string) => {
+    setDataSources((prevSources) =>
+      prevSources.map((source) =>
+        source.id === id ? { ...source, status: 'inactive' as const } : source
+      )
+    );
+  };
+
+  const handleReconnect = (id: string) => {
+    setDataSources((prevSources) =>
+      prevSources.map((source) =>
+        source.id === id ? { ...source, status: 'active' as const } : source
+      )
+    );
   };
 
   return (
@@ -111,7 +151,12 @@ function DataSources() {
           </div>
         ) : (
           dataSources.map((source) => (
-            <DataSourceCard key={source.id} source={source} />
+            <DataSourceCard
+              key={source.id}
+              source={source}
+              onDisconnect={handleDisconnect}
+              onReconnect={handleReconnect}
+            />
           ))
         )}
       </div>

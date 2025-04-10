@@ -18,6 +18,12 @@
   color: #888;
 }
 
+.sourceActions {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+}
+
 .sourceStatus {
   display: flex;
   align-items: center;
@@ -37,4 +43,36 @@
 
 .inactive {
   background-color: #888;
+}
+
+.disconnectButton {
+  padding: 0.5rem 1rem;
+  background: transparent;
+  color: #ff6b6b;
+  border: 1px solid #ff6b6b;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 0.875rem;
+  transition: all 0.2s ease;
+}
+
+.disconnectButton:hover {
+  background: #ff6b6b;
+  color: white;
+}
+
+.reconnectButton {
+  padding: 0.5rem 1rem;
+  background: transparent;
+  color: #4caf50;
+  border: 1px solid #4caf50;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 0.875rem;
+  transition: all 0.2s ease;
+}
+
+.reconnectButton:hover {
+  background: #4caf50;
+  color: white;
 }
