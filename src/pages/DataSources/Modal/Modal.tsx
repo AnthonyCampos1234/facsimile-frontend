@@ -19,7 +19,7 @@ function Modal({ isOpen, onClose, onSubmit }: ModalProps) {
     if (sourceType === 'google-services') {
       // Direct navigation to the Google OAuth endpoint
       // This avoids CORS issues by letting the browser handle the entire redirect flow
-      window.location.href = 'http://localhost:3001/api/v1/connect/google';
+      window.location.href = 'http://localhost:3001/api/v1/auth/connect/google';
     } else {
       // Handle other source types normally in more if statements
       onSubmit(sourceType);
