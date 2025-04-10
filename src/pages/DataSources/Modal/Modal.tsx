@@ -18,13 +18,16 @@ function Modal({ isOpen, onClose, onSubmit }: ModalProps) {
 
     if (sourceType === 'google-services') {
       try {
-        const response = await fetch(`http://localhost:3001/connect/google`, {
-          method: 'POST',
-          credentials: 'include',
-          headers: {
-            'Content-Type': 'application/json'
+        const response = await fetch(
+          `http://localhost:3001/api/v1/auth/connect/google`,
+          {
+            method: 'POST',
+            credentials: 'include',
+            headers: {
+              'Content-Type': 'application/json'
+            }
           }
-        });
+        );
 
         if (!response.ok) {
           throw new Error('Failed to initiate Google auth');
