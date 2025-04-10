@@ -17,28 +17,9 @@ function Modal({ isOpen, onClose, onSubmit }: ModalProps) {
     ).value;
 
     if (sourceType === 'google-services') {
-      try {
-        const response = await fetch(
-          `http://localhost:3001/api/v1/auth/connect/google`,
-          {
-            method: 'POST',
-            credentials: 'include',
-            headers: {
-              'Content-Type': 'application/json'
-            }
-          }
-        );
-
-        if (!response.ok) {
-          throw new Error('Failed to initiate Google auth');
-        }
-
-        const { authUrl } = await response.json();
-        // Redirect to Google's auth page
-        window.location.href = authUrl;
-      } catch (error) {
-        console.error('Error initiating Google auth:', error);
-      }
+      // Direct navigation to the Google OAuth endpoint
+      // This avoids CORS issues by letting the browser handle the entire redirect flow
+      window.location.href = 'http://localhost:3001/api/v1/connect/google';
     } else {
       // Handle other source types normally in more if statements
       onSubmit(sourceType);

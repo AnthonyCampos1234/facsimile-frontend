@@ -59,11 +59,22 @@
   background: #4f4f4f;
 }
 
-.emptyState {
+.emptyState,
+.loadingState,
+.errorState {
   text-align: center;
   padding: 3rem;
   color: #888;
   background: #242424;
   border-radius: 12px;
   border: 1px solid #3f3f3f;
+}
+
+.loadingState {
+  color: #aaa;
+}
+
+.errorState {
+  color: #ff6b6b;
+  border-color: #832222;
 }
