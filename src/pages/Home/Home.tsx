@@ -2,7 +2,18 @@ import { useEffect, useRef, useState } from 'react';
 import styles from './Home.module.css';
 import { getActiveDataSources } from '../DataSources/DataSources';
 
-function Home() {
+interface User {
+  id: string;
+  name: string;
+  email: string;
+  picture: string;
+}
+
+interface HomeProps {
+  user: User | null;
+}
+
+function Home({ user }: HomeProps) {
   const [messages, setMessages] = useState<
     Array<{ text: string; sender: 'user' | 'system' }>
   >([]);

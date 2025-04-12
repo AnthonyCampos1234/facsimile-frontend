@@ -1,0 +1,74 @@
+.container {
+  height: calc(100vh - 64px);
+  padding: 2rem;
+  background-color: #1a1a1a;
+  overflow-y: auto;
+}
+
+.content {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.content h1 {
+  color: white;
+  font-size: 1.5rem;
+  font-weight: 500;
+  margin-bottom: 2rem;
+}
+
+.section {
+  background: #242424;
+  border-radius: 12px;
+  border: 1px solid #3f3f3f;
+  padding: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.section h2 {
+  color: white;
+  font-size: 1rem;
+  font-weight: 500;
+  margin-bottom: 1.25rem;
+}
+
+.profileInfo {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.profilePicture {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  border: 2px solid #3f3f3f;
+}
+
+.userInfo h3 {
+  color: white;
+  font-size: 1rem;
+  font-weight: 500;
+  margin: 0;
+}
+
+.userInfo p {
+  color: #888;
+  font-size: 0.875rem;
+  margin: 0.25rem 0 0 0;
+}
+
+.logoutButton {
+  padding: 0.75rem 1.5rem;
+  background: transparent;
+  color: #ff6b6b;
+  border: 1px solid #ff6b6b;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 0.875rem;
+  transition: all 0.2s ease;
+}
+
+.logoutButton:hover {
+  background: rgba(255, 107, 107, 0.1);
+}
